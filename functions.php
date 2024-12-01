@@ -134,3 +134,43 @@ function BB_PROJECTPOST_register_integration() {
 	buddypress()->integrations['addon'] = new BB_PROJECTPOST_BuddyBoss_Integration();
 }
 add_action( 'bp_setup_integrations', 'BB_PROJECTPOST_register_integration' );
+
+
+/**************************************** WP INTEGRATION ************************************/
+// Hook ht_custom_post_custom_article() to the init action hook
+add_action('init', 'create_omanual_post_type');
+function create_omanual_post_type() {
+    $labels = array(
+        'name'               => __('Projects', 'text-domain'),
+        'singular_name'      => __('Project', 'text-domain'),
+        'menu_name'          => __('Projects', 'text-domain'),
+        'name_admin_bar'     => __('Project', 'text-domain'),
+        'add_new'            => __('Add New', 'text-domain'),
+        'add_new_item'       => __('Add New Project', 'text-domain'),
+        'new_item'           => __('New Project', 'text-domain'),
+        'edit_item'          => __('Edit Project', 'text-domain'),
+        'view_item'          => __('View Project', 'text-domain'),
+        'all_items'          => __('All Projects', 'text-domain'),
+        'search_items'       => __('Search Projects', 'text-domain'),
+        'not_found'          => __('No Projects found.', 'text-domain'),
+        'not_found_in_trash' => __('No oManual Projects found in Trash.', 'text-domain'),
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true, // Show in admin UI
+        'show_in_menu'       => true, // Show in the menu
+        'query_var'          => true,
+        'rewrite'            => array('slug' => 'projects'), // Customize the slug
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'supports'           => array('title', 'editor', 'thumbnail', 'comments'), // Add additional features as needed
+        'taxonomies'         => array('category'), // Adding support for categories
+    );
+
+    register_post_type('omanual', $args);
+}

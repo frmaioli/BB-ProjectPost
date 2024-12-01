@@ -3,7 +3,7 @@
  * Plugin Name: BB-ProjectPost
  * Plugin URI:  https://github.com/frmaioli/BB-ProjectPost
  * Description: Example plugin to show developers how to add their own settings into BuddyBoss Platform.
- * Author:      BuddyBoss
+ * Author:      MadeByDad
  * Author URI:  https://github.com/frmaioli/BB-ProjectPost
  * Version:     1.0.0
  * Text Domain: bb-projectpost
