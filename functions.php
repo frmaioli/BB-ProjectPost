@@ -138,8 +138,8 @@ add_action( 'bp_setup_integrations', 'BB_PROJECTPOST_register_integration' );
 
 /**************************************** WP INTEGRATION ************************************/
 // Hook ht_custom_post_custom_article() to the init action hook
-add_action('init', 'create_omanual_post_type');
-function create_omanual_post_type() {
+add_action('init', 'create_project_post_type');
+function create_project_post_type() {
     $labels = array(
         'name'               => __('Projects', 'text-domain'),
         'singular_name'      => __('Project', 'text-domain'),
@@ -153,7 +153,7 @@ function create_omanual_post_type() {
         'all_items'          => __('All Projects', 'text-domain'),
         'search_items'       => __('Search Projects', 'text-domain'),
         'not_found'          => __('No Projects found.', 'text-domain'),
-        'not_found_in_trash' => __('No oManual Projects found in Trash.', 'text-domain'),
+        'not_found_in_trash' => __('No Projects found in Trash.', 'text-domain'),
     );
 
     $args = array(
@@ -168,9 +168,12 @@ function create_omanual_post_type() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => null,
-        'supports'           => array('title', 'editor', 'thumbnail', 'comments'), // Add additional features as needed
-        'taxonomies'         => array('category'), // Adding support for categories
+        'supports'           => array('title', 'editor', 'thumbnail', 'author', 'comments', 'custom-fields'), // Add additional features as needed
+        'taxonomies'         => array('category', 'post_tag'), // Adding support for categories
     );
 
-    register_post_type('omanual', $args);
+    register_post_type('project', $args);
 }
+
+// Register the custom post type by hooking into the 'init' action
+add_action('init', 'create_project_post_type');
